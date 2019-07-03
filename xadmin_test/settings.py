@@ -134,7 +134,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'stati')
 # 微信配置
 APPID = 'wx039bd896ff848820'
 SECRET = 'b06eb5e59fdcd2addd13abba1c674dd6'
