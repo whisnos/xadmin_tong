@@ -24,7 +24,7 @@ class UserProfile(AbstractUser):
     # is_active = models.BooleanField(default=False, verbose_name='是否审核')
 
     def __str__(self):
-        return self.username
+        return self.name
 
     class Meta:
         verbose_name = '用户管理'
