@@ -79,17 +79,26 @@ WSGI_APPLICATION = 'xadmin_test.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'xadmin_test',
+#         'USER': 'root',
+#         'PASSWORD': 'root',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'xadmin_test',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'NAME': 'd_tong',
+        'USER': 'd_tong',
+        'PASSWORD': 'mdSnb3836db3aMhn',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
