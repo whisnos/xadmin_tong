@@ -45,10 +45,14 @@ class UserInfoViewset(mixins.ListModelMixin, viewsets.GenericViewSet,
             code = 400
             resp['msg'] = 'openid获取失败'
             return Response(data=resp, status=code)
-        yesno = UserProfile.objects.filter(is_active=True, openid=openid).first()
+        yesno = UserProfile.objects.filter(openid=openid).first()
         if not yesno:
+            code = 400
+            resp['msg'] = '用户未注册'
+            return Response(data=resp, status=code)
+        if not yesno.is_active:
             code = 202
-            resp['msg'] = '用户等待审核'
+            resp['msg'] = '用户未审核'
             return Response(data=resp, status=code)
         code = 200
         if name:
@@ -179,10 +183,14 @@ class FeedBackInfoViewset(mixins.CreateModelMixin, viewsets.GenericViewSet, ):
             code = 400
             resp['msg'] = 'openid获取失败'
             return Response(data=resp, status=code)
-        yesno = UserProfile.objects.filter(is_active=True, openid=openid).first()
+        yesno = UserProfile.objects.filter(openid=openid).first()
         if not yesno:
             code = 400
-            resp['msg'] = '用户未绑定'
+            resp['msg'] = '用户未注册'
+            return Response(data=resp, status=code)
+        if not yesno.is_active:
+            code = 202
+            resp['msg'] = '用户未审核'
             return Response(data=resp, status=code)
         validated_data = serializer.validated_data
         validated_data['user']=yesno
