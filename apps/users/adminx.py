@@ -22,11 +22,11 @@ class XadminXadmin(object):
                'date_joined', 'user_permissions', 'is_superuser']
 
     readonly_fields = ['openid']
-
+    model_icon = 'fa fa-users'
 
 class FeedBackInfoXadmin(object):
     list_display = ['id', 'content', 'add_time', 'user']
-
+    model_icon = 'fa fa-file-text'
 
 xadmin.site.register(NoteInfo, NoteInfoXadmin)
 xadmin.site.register(CommAdminView, ComSetting)

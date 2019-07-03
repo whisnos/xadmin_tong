@@ -47,11 +47,10 @@ class UserInfoViewset(mixins.ListModelMixin, viewsets.GenericViewSet,
             return Response(data=resp, status=code)
         yesno = UserProfile.objects.filter(is_active=True, openid=openid).first()
         if not yesno:
-            code = 400
-            resp['msg'] = '用户未绑定'
+            code = 202
+            resp['msg'] = '用户等待审核'
             return Response(data=resp, status=code)
         code = 200
-        resp['msg'] = 'openid获取失败'
         if name:
             all_user = UserProfile.objects.filter(is_active=True, is_superuser=False, name__icontains=name).order_by(
                 '-add_time')
@@ -78,12 +77,13 @@ class UserInfoViewset(mixins.ListModelMixin, viewsets.GenericViewSet,
             return Response(data=resp, status=code)
         user_q = UserProfile.objects.filter(openid=openid)
         if user_q.exists():
-            code = 400
+            code = 202
             resp['msg'] = '此微信号已绑定一条记录'
             return Response(data=resp, status=code)
         del validated_data['JSCODE']
         validated_data['openid'] = openid
         validated_data['username'] = validated_data['name']
+        validated_data['is_active'] = False
         user = UserProfile.objects.create(**validated_data)
         # payload = jwt_payload_handler(user)
         # token = jwt_encode_handler(payload)
