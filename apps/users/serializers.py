@@ -41,7 +41,7 @@ class UserDetailPutSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
-        instance.username = validated_data.get('name', instance.username)
+        # instance.username = validated_data.get('name', instance.username)
         instance.work = validated_data.get('work', instance.work)
         instance.mobile = validated_data.get('mobile', instance.mobile)
         instance.backup_m = validated_data.get('backup_m', instance.backup_m)
