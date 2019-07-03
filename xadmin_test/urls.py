@@ -15,9 +15,11 @@ Including another URLconf
 """
 # from django.contrib import admin
 from django.conf.urls import url, include
-from rest_framework.routers import DefaultRouter,SimpleRouter
+from django.views.static import serve
+from rest_framework.routers import DefaultRouter, SimpleRouter
 import xadmin
 from users.views import UserInfoViewset, NoteInfoViewset, FeedBackInfoViewset
+from xadmin_test.settings import STATIC_ROOT
 
 route = SimpleRouter()
 route.register(r'user/info', UserInfoViewset, base_name="user/info")
@@ -27,4 +29,5 @@ urlpatterns = [
     url(r'^', include(route.urls)),
     # path('admin/', admin.site.urls),
     url(r'^xadmin/', xadmin.site.urls),
+    url(r'^static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT}), # 解决静态文件加载失败问题
 ]
