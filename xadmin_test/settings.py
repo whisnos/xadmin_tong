@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
-    'xadmin',
+    'xadmin.apps.XAdminConfig',
     'crispy_forms',
     'rest_framework',
 ]
