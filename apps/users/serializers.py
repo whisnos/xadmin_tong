@@ -36,13 +36,12 @@ class UserDetailPutSerializer(serializers.Serializer):
     backup_m = serializers.CharField(write_only=True, required=False, allow_null=True, allow_blank=True)
     group = serializers.ChoiceField(choices=CHOICE_LEVEL, label='类型', required=False)
 
-    def validate_name(self, data):
-        print(1)
-        return data
+    # def validate_name(self, data):
+    #     return data
 
     def update(self, instance, validated_data):
-        print(2)
         instance.name = validated_data.get('name', instance.name)
+        instance.username = validated_data.get('name', instance.username)
         instance.work = validated_data.get('work', instance.work)
         instance.mobile = validated_data.get('mobile', instance.mobile)
         instance.backup_m = validated_data.get('backup_m', instance.backup_m)
