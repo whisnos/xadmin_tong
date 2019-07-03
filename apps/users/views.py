@@ -86,7 +86,7 @@ class UserInfoViewset(mixins.ListModelMixin, viewsets.GenericViewSet,
             return Response(data=resp, status=code)
         del validated_data['JSCODE']
         validated_data['openid'] = openid
-        # validated_data['username'] = validated_data['name']
+        validated_data['username'] = openid
         validated_data['is_active'] = False
         user = UserProfile.objects.create(**validated_data)
         # payload = jwt_payload_handler(user)
