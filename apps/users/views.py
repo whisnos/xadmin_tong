@@ -30,30 +30,29 @@ class UserInfoViewset(mixins.ListModelMixin, viewsets.GenericViewSet,
         resp = {}
         JSCODE = request.GET.get('JSCODE', None)
         name = request.GET.get('name', None)
-        # JSCODE = request.data.get('JSCODE',None)
-        if not JSCODE:
-            code = 400
-            resp['msg'] = 'JSCODE不可为空'
-            return Response(data=resp, status=code)
-        dict_result = make_openid(JSCODE)
-        if dict_result.get('errmsg'):
-            code = 400
-            resp['msg'] = '创建失败'
-            return Response(data=resp, status=code)
-        openid = dict_result.get('openid')
-        if not openid:
-            code = 400
-            resp['msg'] = 'openid获取失败'
-            return Response(data=resp, status=code)
-        yesno = UserProfile.objects.filter(openid=openid).first()
-        if not yesno:
-            code = 400
-            resp['msg'] = '用户未注册'
-            return Response(data=resp, status=code)
-        if not yesno.is_active:
-            code = 202
-            resp['msg'] = '用户未审核'
-            return Response(data=resp, status=code)
+        # if not JSCODE:
+        #     code = 400
+        #     resp['msg'] = 'JSCODE不可为空'
+        #     return Response(data=resp, status=code)
+        # dict_result = make_openid(JSCODE)
+        # if dict_result.get('errmsg'):
+        #     code = 400
+        #     resp['msg'] = '创建失败'
+        #     return Response(data=resp, status=code)
+        # openid = dict_result.get('openid')
+        # if not openid:
+        #     code = 400
+        #     resp['msg'] = 'openid获取失败'
+        #     return Response(data=resp, status=code)
+        # yesno = UserProfile.objects.filter(openid=openid).first()
+        # if not yesno:
+        #     code = 400
+        #     resp['msg'] = '用户未注册'
+        #     return Response(data=resp, status=code)
+        # if not yesno.is_active:
+        #     code = 202
+        #     resp['msg'] = '用户未审核'
+        #     return Response(data=resp, status=code)
         code = 200
         if name:
             all_user = UserProfile.objects.filter(is_active=True, is_superuser=False, name__icontains=name).order_by(
@@ -87,7 +86,7 @@ class UserInfoViewset(mixins.ListModelMixin, viewsets.GenericViewSet,
         del validated_data['JSCODE']
         validated_data['openid'] = openid
         validated_data['username'] = openid
-        validated_data['is_active'] = False
+        # validated_data['is_active'] = False
         user = UserProfile.objects.create(**validated_data)
         # payload = jwt_payload_handler(user)
         # token = jwt_encode_handler(payload)
